@@ -10,6 +10,8 @@
 class jMenuItem {
 	
 	public $submenu = NULL;
+	public $linkattrs = array();
+	public $wrapperattrs = array();
 	
 	public function __construct($text, $url, $submenu=NULL, array $linkattrs=array(), array $wrapperattrs=array()) {
 		$this->text = $text;
