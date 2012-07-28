@@ -17,7 +17,8 @@ abstract class jMenuBase implements Iterator {
 	private $_stack = 0;
 	
 	protected $items = array();
-	protected $attrs = array();
+	
+	public $attrs = array();
 	public $title = '';
 	
 	public function add_item (jMenuItem $item) {

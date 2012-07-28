@@ -16,10 +16,7 @@ class jMenuItem {
 		$this->linkattrs = $linkattrs;
 		$this->linkattrs['href'] = $url;
 		$this->wrapperattrs = $wrapperattrs;
-		
-		if($submenu !== NULL) {
-			$this->set_submenu($submenu);
-		}
+		$this->submenu = $submenu;
 	}
 	
 	public function set_submenu($selector) {
@@ -43,7 +40,8 @@ class jMenuItem {
 		
 		
 		if ($this->submenu != NULL) {
-			$str .= $this->submenu->as_list();
+			$sub = jMenu::get($this->submenu);
+			$str .= $sub->as_list();
 		}
 		$str .= '</li>';
 		return $str;
