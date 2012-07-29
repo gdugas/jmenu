@@ -14,8 +14,8 @@
 				{/foreach}>
 				{$item->text}
 			</a>
-			{if $item->submenu}
-				{zone 'jmenu~menu', array('menu'=>$item->submenu)}
+			{if $item->submenu != NULL}
+				{zone 'jmenu~menu', array('menu'=>$item->submenu->selector)}
 			{/if}
 		</li>
 	{/foreach}

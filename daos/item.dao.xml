@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dao xmlns="http://jelix.org/ns/dao/1.0">
+    <datasources>
+        <primarytable name="jmenu_item" realname="jmenu_item" primarykey="id" />
+    </datasources>
+    <record>
+        <property name="id" fieldname="id" datatype="int" autoincrement="true"/>
+        <property name="menu" fieldname="menu" datatype="int" required="true"/>
+        <property name="submenu" fieldname="submenu" datatype="int"/>
+        <property name="text" fieldname="text" datatype="varchar" required="true" maxlength="255"/>
+        <property name="url" fieldname="url" datatype="varchar" required="true" maxlength="255"/>
+        <property name="linkattrs" fieldname="linkattrs" datatype="text" default=""/>
+        <property name="wrapperattrs" fieldname="wrapperattrs" datatype="text" default=""/>
+        <property name="position" fieldname="position" datatype="int" required="true"/>
+        <!--<property name="" fieldname="" datatype="string/int/float/date"
+        required="yes" maxlength="" minlength="" regexp="" sequence=""
+        updatepattern="" insertpattern="" selectpattern=""/>-->
+    </record>
+    <factory events="deletebefore, deletebybefore, insertafter">
+    	<method name="findByMenu" type="select">
+    		<parameter name="menu_id"/>
+    		<conditions>
+    			<eq property="menu" expr="$menu_id"/>
+    		</conditions>
+    		<order>
+    			<orderitem property="position" way="desc" />
+    			<orderitem property="text" way="asc" />
+    		</order>
+    	</method>
+        <!--<method name="findByStage" type="select/selectfirst/delete/update/php">
+            <parameter name="" />
+            <values>
+                <value property="" value="" />
+            </values>
+            <conditions logic="and/or">
+                <eq property="" value="" />
+            </conditions>
+            <order>
+                <orderitem property="" way="asc/desc" />
+            </order>
+            <limit offset="" count=""/>
+            <body><![CDATA[
+            ]]></body>
+        </method>-->
+    </factory>
+</dao>

@@ -12,13 +12,16 @@ class jMenuItem {
 	public $submenu = NULL;
 	public $linkattrs = array();
 	public $wrapperattrs = array();
+	public $text = '';
 	
 	public function __construct($text, $url, $submenu=NULL, array $linkattrs=array(), array $wrapperattrs=array()) {
 		$this->text = $text;
 		$this->linkattrs = $linkattrs;
 		$this->linkattrs['href'] = $url;
 		$this->wrapperattrs = $wrapperattrs;
-		$this->submenu = $submenu;
+		if ($submenu != NULL) {
+			$this->set_submenu($submenu);
+		}
 	}
 	
 	public function set_submenu($selector) {
@@ -42,8 +45,7 @@ class jMenuItem {
 		
 		
 		if ($this->submenu != NULL) {
-			$sub = jMenu::get($this->submenu);
-			$str .= $sub->as_list();
+			$str .= $this->submenu->as_list();
 		}
 		$str .= '</li>';
 		return $str;

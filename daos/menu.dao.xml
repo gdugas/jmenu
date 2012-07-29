@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dao xmlns="http://jelix.org/ns/dao/1.0">
+    <datasources>
+        <primarytable name="jmenu_menu" realname="jmenu_menu" primarykey="id" />
+    </datasources>
+    <record>
+        <property name="id" fieldname="id" datatype="int" autoincrement="true"/>
+        <property name="title" fieldname="title" datatype="varchar" required="true" maxlength="50"/>
+        <property name="locale" fieldname="locale" datatype="varchar" maxlength="100"/>
+        <property name="attributes" fieldname="attributes" datatype="text" default=""/>
+        <property name="is_sub" fieldname="is_sub" datatype="boolean" default="false" />
+        <!--<property name="" fieldname="" datatype="string/int/float/date"
+        required="yes" maxlength="" minlength="" regexp="" sequence=""
+        updatepattern="" insertpattern="" selectpattern=""/>-->
+    </record>
+    
+    <factory events="deletebefore">
+    	<method name="getByTitle" type="selectfirst">
+    		<parameter name="title" />
+    		<conditions>
+    			<eq property="title" expr="$title" />
+    		</conditions>
+    	</method>
+        <!--<method name="findByStage" type="select/selectfirst/delete/update/php">
+            <parameter name="" />
+            <values>
+                <value property="" value="" />
+            </values>
+            <conditions logic="and/or">
+                <eq property="" value="" />
+            </conditions>
+            <order>
+                <orderitem property="" way="asc/desc" />
+            </order>
+            <limit offset="" count=""/>
+            <body><![CDATA[
+            ]]></body>
+        </method>-->
+    </factory>
+</dao>

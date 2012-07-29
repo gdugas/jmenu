@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form xmlns="http://jelix.org/ns/forms/1.1">
+
+<hidden ref="menu" />
+<hidden ref="basemenu" />
+
+
+<input ref="text" required="true" maxlength="255">
+	<label>Text</label>
+</input>
+
+<input ref="url" required="true" maxlength="255">
+	<label>Url</label>
+</input>
+
+<!-- textarea ref="linkattrs">
+	<label>Linkattrs</label>
+</textarea>
+
+<textarea ref="wrapperattrs">
+	<label>Wrapperattrs</label>
+</textarea -->
+
+<input ref="position" required="true" type="integer" defaultvalue="0">
+	<label>Position</label>
+</input>
+
+<submit ref="_submit">
+	<label>ok</label>
+</submit>
+</form>

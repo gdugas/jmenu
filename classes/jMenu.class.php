@@ -15,11 +15,33 @@ jClasses::inc('jmenu~jMenuItem');
 abstract class jMenuBase implements Iterator {
 	
 	private $_stack = 0;
+	private $selector = '';
+	private $module = '';
+	private $name = '';
 	
 	protected $items = array();
+	protected $readonly = array('selector','module','name'); 
 	
 	public $attrs = array();
 	public $title = '';
+	
+	
+	public function __get($name) {
+		return in_array($name,$this->readonly) ? $this->$name : null;
+	}
+	
+	public function __construct(array $params=array()) {
+		$this->attrs = $params;
+		
+		$reflector = new ReflectionClass(get_class($this));
+		$names = explode('/', $reflector->getFileName());
+		$length = count($names);
+		$this->module = $names[$length - 3];
+		
+		$filenames = explode('.', $names[$length - 1]);
+		$this->name = $filenames[0];
+		$this->selector = $this->module.'~'.$this->name;
+	}
 	
 	public function add_item (jMenuItem $item) {
 		$this->items[] = $item;
@@ -48,7 +70,7 @@ abstract class jMenuBase implements Iterator {
 		return $this->_stack;
 	}
 	public function next () {
-		++$this->_stack;
+		$this->_stack += 1;
 	}
 	public function rewind () {
 		$this->_stack = 0;
@@ -60,10 +82,10 @@ abstract class jMenuBase implements Iterator {
 
 
 class jMenu {
-	public static function get($sel) {
+	public static function get($sel, array $params = array()) {
 		$jsel = new jSelectorMenu($sel);
 		require_once($jsel->getPath());
 		$classname = $jsel->resource.'Menu';
-		return new $classname();
+		return new $classname($params);
 	}
 }

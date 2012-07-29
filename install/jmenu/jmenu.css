@@ -1,0 +1,19 @@
+.ui-state-highlight {
+	background-color: orange;
+}
+#admin_menuitems {
+	border-left: 1px solid;
+	border-right: 1px solid;
+}
+#admin_menuitems ul {
+	padding-bottom: 1em;
+	border: 1px dashed #ccc;
+}
+
+#admin_menuitems li.add-item {
+	list-style-type: none;
+}
+
+#admin_menuitems .actions {
+	margin-left: 50px;
+}
