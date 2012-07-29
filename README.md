@@ -15,6 +15,7 @@ Example:
 			'class' => 'mainsite-menu menu'
 		);
 		public function __construct() {
+			parent::__construct();
 			$this->add_item(new jMenuItem('home','#'));
 			$this->add_item(new jMenuItem('documentation','#'));
 			$this->add_item(new jMenuItem('contact','#'));
