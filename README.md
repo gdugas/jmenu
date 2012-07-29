@@ -1,8 +1,28 @@
 Quickstart
 ==========
 
-Creating menu
--------------
+There is 2 type of menu: object menus, and database menus
+
+Db Menus
+--------
+
+You can manage db menus with the jelix admin interface. Then, you just have to call your menus, in your code:
+
+	jClasses::inc('jmenu~jMenuDb');
+	$menu = jMenuDb::get('menu_title');
+	
+	// displaying menu
+	$menu->as_list();
+
+in your template:
+
+	{zone 'jmenu~db', array('menu'=>'menu_title'[, 'tpl'=>'optionnal_template'])}
+
+
+Base menus
+----------
+
+### Creating your menu
 
 First, you need to choose a unique identifier for your menu (unique over your application), 'mainsite' for example.
 Then create a menu class. Note that the class name is a concatenation of the name and of 'Menu', so in our case, 'mainsiteMenu'. Put that class in a file called {name}.menu.php, so mainsite.menu.php for us, in the 'menus' folder of your module. Remember, your menu class must inherit from jMenuBase.
@@ -24,14 +44,12 @@ Example:
 	}
 
 
-Getting the menu
-----------------
+### Getting the menu
 
 $menu = jMenu::get('module~menu_identifier');
 
 
-Displaying menu
----------------
+### Displaying menu
 
 in php code:
 
@@ -42,8 +60,7 @@ in template:
 	{zone 'jmenu~menu', array('menu'=>'module~menu_identifier')}
 
 
-Iterate over menu items
------------------------
+### Iterate over menu items
 
 jMenuBase extend the php Iterator object to iterate items:
 
@@ -54,6 +71,26 @@ jMenuBase extend the php Iterator object to iterate items:
 
 API (quickview)
 ===============
+
+jMenu
+-----
+
+### Static methods
+
+Name | Parameters  | Return value | Description
+---- | ----------- | ------------ | ----------------------------------------
+get  | string      | jMenuBase    | Getting the menu defined by the selector
+
+
+jMenuDb
+-------
+
+### Static methods
+
+Name | Parameters  | Return value | Description
+---- | ----------- | ------------ | -------------------------------------
+get  | string      | jMenuDbBase  | Getting the menu defined by the title
+
 
 jMenuBase
 ---------
@@ -93,3 +130,13 @@ Name        | Parameters   | Return value | Description
 set_submenu | string       | void         | Setting a submenu to the item, defined by the selector
 as_list     | void         | string       | Render the item as list item
 
+
+jMenuDbBase
+-----------
+
+(see jMenuBase)
+
+jMenuDbItem
+-----------
+
+(see jMenuItem)
