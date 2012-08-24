@@ -12,7 +12,7 @@
 class jmenuModuleInstaller extends jInstallerModule {
 
     function install() {
-        if ($this->firstDbExec()) {
+        if ($this->firstDbExec() && ! $this->getParameter('without-db')) {
             $this->execSQLScript('sql/install');
         }
 		if ((! $this->getParameter('nocopyfiles') && $this->firstExec('copyfile')) || $this->getParameter('forcecopyfiles')) {
