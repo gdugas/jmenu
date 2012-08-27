@@ -7,6 +7,7 @@
 * @link      http://github.com/gdugas
 * @license    All rights reserved
 */
+
 class jSelectorMenu extends jSelectorModule {
 	
 	protected $type = 'menu';

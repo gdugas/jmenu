@@ -7,8 +7,8 @@
 * @link      http://github.com/gdugas
 * @license    All rights reserved
 */
+
 jClasses::inc('jmenu~jMenuItem');
-jClasses::inc('jmenu~jMenuDb');
 
 class jMenuDbItem extends jMenuItem {
 	public $record = NULL;

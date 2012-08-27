@@ -8,7 +8,10 @@ class menuZone extends jZone {
 	protected $_tplname='jmenu~zone_menu';
 	
 	protected function _prepareTpl() {
-		$menu = jMenu::get($this->param('menu'));
+		$menu = $this->param('menu');
+		if (! $menu instanceof jMenuBase) {
+			$menu = jMenu::get($menu);
+		}
 		$this->_tpl->assign('menu', $menu);
 	}
 }
