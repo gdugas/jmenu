@@ -1,6 +1,8 @@
 <?php
 
-abstract class jMenuBase implements Iterator {
+jClasses::inc('jmenu~jMenuAttrs');
+
+class jMenuBase implements Iterator {
 	
 	private $_stack = 0;
 	private $selector = '';
@@ -10,17 +12,27 @@ abstract class jMenuBase implements Iterator {
 	protected $items = array();
 	protected $readonly = array('selector','module','name'); 
 	
-	public $attrs = array();
+	public $attrs = NULL;
 	public $title = '';
 	
 	
 	public function __get($name) {
-		return in_array($name,$this->readonly) ? $this->$name : null;
+		if (in_array($name,$this->readonly)) {
+			return $this->$name;
+		} else {
+			return parent::__get($name);
+		}
 	}
 	
-	public function __construct(array $params=array()) {
-		$this->attrs = $params;
+	protected function _configure ($params) {
+		$this->attrs = new jMenuAttrs($params);
+	}
+	
+	public function __construct (array $params=array()) {
+		$this->_configure($params);
 		
+		
+		// Setting $module, $name and $selector readonly properties
 		$reflector = new ReflectionClass(get_class($this));
 		$names = explode('/', $reflector->getFileName());
 		$length = count($names);
@@ -31,13 +43,23 @@ abstract class jMenuBase implements Iterator {
 		$this->selector = $this->module.'~'.$this->name;
 	}
 	
-	public function add_item (jMenuItem $item) {
+	
+	public function addItem (jMenuItem $item) {
 		$this->items[] = $item;
 	}
 	
-	public function as_list() {
+	
+	
+	public function as_string () {
 		return jZone::get('jmenu~menu', array('menu'=>$this));
 	}
+	public function as_list () {
+		return $this->as_string();
+	}
+	
+	
+	
+	
 	
 	
 	// Item iterator

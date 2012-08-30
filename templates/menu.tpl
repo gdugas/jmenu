@@ -1,7 +1,7 @@
 <ul
 	{foreach $menu->attrs as $name=>$value}
 		{$name}="{$value}"
-	{/foreach} >
+	{/foreach}>
 	
 	{foreach $menu as $item}
 		<li
@@ -15,7 +15,7 @@
 				{$item->text}
 			</a>
 			{if $item->submenu != NULL}
-				{zone 'jmenu~menu', array('menu'=>$item->submenu->selector)}
+				{zone 'jmenu~menu', array('menu'=>$item->submenu)}
 			{/if}
 		</li>
 	{/foreach}

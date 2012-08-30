@@ -16,7 +16,9 @@ jClasses::inc('jmenu~jMenuDbItem');
 class jMenuDb {
 	public static function get($title, $params = array()) {
 		$menu = jDao::get('jmenu~menu')->getByTitle($title);
-		if (! $menu) { return False; }
+		if (! $menu) {
+			return $menu;
+		}
 		
 		$dbmenu = new jMenuDbBase($menu, $params);
 		return $dbmenu;

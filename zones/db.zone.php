@@ -5,7 +5,7 @@ jClasses::inc('jmenu~jMenuDb');
 
 class dbZone extends jZone {
 	
-	protected $_tplname='jmenu~zone_menudb';
+	protected $_tplname='jmenu~menu_db';
 	
 	protected function _prepareTpl() {
 		$menu_title = $this->param('menu');

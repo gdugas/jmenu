@@ -22,11 +22,11 @@ class jMenuDbItem extends jMenuItem {
 		$this->wrapperattrs = $wrapperattrs;
 		
 		if ($this->record->submenu != NULL) {
-			$this->set_submenu(jDao::get('jmenu~menu')->get($this->record->submenu));
+			$this->setSubmenu(jDao::get('jmenu~menu')->get($this->record->submenu));
 		}
 	}
 	
-	public function set_submenu($menu) {
+	public function setSubmenu($menu) {
 		$this->submenu = new jMenuDbBase($menu);
 	}
 }
