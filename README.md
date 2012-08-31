@@ -9,18 +9,18 @@ Db Menus
 You can manage db menus with the jelix admin interface. Then, you just have to call your menus, in your code:
 
 	jClasses::inc('jmenu~jMenuDb');
-	$menu = jMenuDb::get('menu_title');
+	$menu = jMenuDb::get($id);
 	
 	// displaying menu
-	$menu->as_list();
+	$menu->toString();
 
 in your template:
 
-	{zone 'jmenu~db', array('menu'=>'menu_title'[, 'tpl'=>'optionnal_template'])}
+	{zone 'jmenu~db', array('menu'=>$id[, 'tpl'=>'optionnal_template_selector'])}
 
 
-Base menus
-----------
+Object menus
+------------
 
 ### Creating your menu
 
@@ -30,7 +30,7 @@ Then create a menu class. Note that the class name is a concatenation of the nam
 Example:
 	// file mainsite.menu.php
 	
-	class mainsiteMenu extend jMenuBase {
+	class mainsiteMenu extend jMenuObject {
 		public $attrs = array(
 			'class' => 'mainsite-menu menu'
 		);
@@ -53,7 +53,7 @@ $menu = jMenu::get('module~menu_identifier');
 
 in php code:
 
-	$menu->as_list();
+	$menu->toString();
 
 in template:
 
@@ -62,7 +62,7 @@ in template:
 
 ### Iterate over menu items
 
-jMenuBase extend the php Iterator object to iterate items:
+jMenuObject extend the php Iterator object to iterate items:
 
 	foreach($menu as $item) {
 	 ...
@@ -79,7 +79,7 @@ jMenu
 
 Name | Parameters  | Return value | Description
 ---- | ----------- | ------------ | ----------------------------------------
-get  | string      | jMenuBase    | Getting the menu defined by the selector
+get  | string      | jMenuObject  | Getting the menu defined by the selector
 
 
 jMenuDb
@@ -89,7 +89,7 @@ jMenuDb
 
 Name | Parameters  | Return value | Description
 ---- | ----------- | ------------ | -------------------------------------
-get  | string      | jMenuDbBase  | Getting the menu defined by the title
+get  | string      | jMenuBase    | Getting the menu defined by the title
 
 
 jMenuBase
@@ -97,46 +97,35 @@ jMenuBase
 
 ### Public properties
 
-Name   | Type   | Description
------- | ------ | -------------------------
-$attrs | array  | Html attributes to render
-$title | string | Menu title to render
+Name   | Type        | Description
+------ | ----------- | -------------------------
+$attrs | jMenuAttrs  | Html attributes to render
+$title | string      | Menu title to render
 
 ### Public methods
 
 Name     | Parameters   | Return value | Description
 -------- | ------------ | ------------ | -----------------------
-add_item | jMenuItem    | void         | Adding item to the menu
-as_list  | void         | string       | Render the menu as list
+addItem  | jMenuItem    | void         | Adding item to the menu
+toString | void         | string       | Render the menu as list
 
 
 jMenuItem
 ---------
 
-> jMenuItem(string $text_link, string $url[, string $submenu_selector[, array $link_attributes[, array $wrapper_attributes]]])
+> jMenuItem(string $text_link, string $url[, jMenuBase $submenu[, jMenuAttrs $link_attributes[, jMenuAttrs $wrapper_attributes]]])
 
 ### Public properties
 
-Name          | Type   | Description
-------------- | ------ | -----------------------------------------
-$linkattrs    | array  | Html 'a' tag attributes to render
-$wrapperattrs | array  | Html 'a' tag wrapper attributes to render
-$submenu      | string | Submenu selector
+Name          | Type        | Description
+------------- | ----------- | -----------------------------------------
+$linkattrs    | jMenuAttrs  | Html 'a' tag attributes to render
+$wrapperattrs | jMenuAttrs  | Html 'a' tag wrapper attributes to render
+$submenu      | jMenuBase   | jMenuBase object
 
 ### Public methods
 
 Name        | Parameters   | Return value | Description
------------ | ------------ | ------------ | ------------------------------------------------------
-set_submenu | string       | void         | Setting a submenu to the item, defined by the selector
-as_list     | void         | string       | Render the item as list item
+----------- | ------------ | ------------ | -----------------------------
+setSubmenu  | jMenuBase    | void         | Setting a submenu to the item
 
-
-jMenuDbBase
------------
-
-(see jMenuBase)
-
-jMenuDbItem
------------
-
-(see jMenuItem)
