@@ -16,6 +16,6 @@
 <h2>Associated items</h2>
 
 <div id="admin_menuitems">
-	{zone 'jmenu~db', array('menu'=>$form->getData('title'), 'tpl'=>'admin_menudb_zone')}
+	{zone 'jmenu~db', array('menu'=>$id, 'tpl'=>'admin_menudb_zone')}
 </div>
 

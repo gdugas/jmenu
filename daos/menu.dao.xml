@@ -14,7 +14,7 @@
         updatepattern="" insertpattern="" selectpattern=""/>-->
     </record>
     
-    <factory events="deletebefore">
+    <factory events="deletebefore, deletebybefore, insertafter, updateafter">
     	<method name="getByTitle" type="selectfirst">
     		<parameter name="title" />
     		<conditions>

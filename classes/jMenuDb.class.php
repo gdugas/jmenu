@@ -9,18 +9,20 @@
 */
 
 
-jClasses::inc('jmenu~jMenuDbBase');
-jClasses::inc('jmenu~jMenuDbItem');
+jClasses::inc('jmenu~jMenuDbCompiler');
+jClasses::inc('jmenu~jMenuBase');
+jClasses::inc('jmenu~jMenuItem');
 
 
 class jMenuDb {
-	public static function get($title, $params = array()) {
-		$menu = jDao::get('jmenu~menu')->getByTitle($title);
-		if (! $menu) {
-			return $menu;
+	
+	public static function get($id, $params = array()) {
+		if (! jMenuDbCompiler::exists($id)) {
+			jMenuDbCompiler::compile($id);
 		}
+		require_once(jMenuDbCompiler::getCompiledPath($id));
+		$menuClass = 'jMenuDb'.$id;
 		
-		$dbmenu = new jMenuDbBase($menu, $params);
-		return $dbmenu;
+		return new $menuClass($params);
 	}
 }

@@ -9,24 +9,22 @@
 */
 
 jClasses::inc('jmenu~jMenu');
+jClasses::inc('jmenu~jMenuAttrs');
+
 class jMenuItem {
 	
 	public $submenu = NULL;
 	public $text = '';
-	
-	
-	protected function _configure ($linkattrs, $wrapperattrs) {
-		$this->linkattrs = new jMenuAttrs($linkattrs);
-		$this->wrapperattrs = new jMenuAttrs($wrapperattrs);
-	}
+	public $linkattrs = NULL;
+	public $wrapperattrs = NULL;
 	
 	public function __construct($text, $url, $submenu=NULL, array $linkattrs=array(), array $wrapperattrs=array()) {
-		$this->_configure($linkattrs, $wrapperattrs);
+		$this->linkattrs = new jMenuAttrs($linkattrs);
+		$this->wrapperattrs = new jMenuAttrs($wrapperattrs);
 		
 		$this->text = $text;
-		$this->linkattrs = $linkattrs;
-		$this->linkattrs['href'] = $url;
-		$this->wrapperattrs = $wrapperattrs;
+		$this->linkattrs->setAttr('href', $url);
+		
 		if ($submenu != NULL) {
 			$this->setSubmenu($submenu);
 		}
@@ -39,27 +37,5 @@ class jMenuItem {
 			$this->submenu = jMenu::get($submenu);
 		}
 	}
-	
-	public function as_list() {
-		$str  = '<li';
-		foreach($this->wrapperattrs as $name=>$value) {
-			$str .= ' '.$name.'="'.$value.'"';
-		}
-		$str .= '>';
-		
-		$str .= '<a';
-		foreach($this->linkattrs as $name=>$value) {
-			$str .= ' '.$name.'="'.$value.'"';
-		}
-		$str .= '>';
-		$str .= $this->text;
-		$str .= '</a>';
-		
-		
-		if ($this->submenu != NULL) {
-			$str .= $this->submenu->as_list();
-		}
-		$str .= '</li>';
-		return $str;
-	}
+
 }

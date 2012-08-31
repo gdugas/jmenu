@@ -8,7 +8,7 @@
 * @license    All rights reserved
 */
 
-jClasses::inc('jmenu~jMenuBase');
+jClasses::inc('jmenu~jMenuObject');
 jClasses::inc('jmenu~jMenuItem');
 jClasses::inc('jmenu~jSelectorMenu');
 

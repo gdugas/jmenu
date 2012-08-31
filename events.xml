@@ -1,6 +1,7 @@
 <events xmlns="http://jelix.org/ns/events/1.0">
 	<listener name="dao">
 		<event name="daoInsertAfter" />
+		<event name="daoUpdateAfter" />
 		<event name="daoDeleteBefore" />
 		<event name="daoDeleteByBefore" />
 	</listener>

@@ -14,8 +14,4 @@ class jSelectorMenu extends jSelectorModule {
 	protected $_dirname = 'menus/';
 	protected $_suffix = '.menu.php';
 	
-	protected function _createCachePath(){
-		$this->_cachePath = '';
-	}
-	
 }

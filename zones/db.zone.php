@@ -8,15 +8,13 @@ class dbZone extends jZone {
 	protected $_tplname='jmenu~menu_db';
 	
 	protected function _prepareTpl() {
-		$menu_title = $this->param('menu');
 		$menu = $this->param('menu');
-		if (! $menu instanceof jMenuDbBase) {
+		if (! $menu instanceof jMenuBase) {
 			$menu = jMenuDb::get($menu);
 		}
 		
+		$basemenu = $this->param('basemenu', $menu->id);
 		$tpl = $this->param('tpl',NULL);
-		$basemenu = $this->param('basemenu', $menu_title);
-		
 		if ($tpl) {
 			$this->_tplname = $tpl;
 		}

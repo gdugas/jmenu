@@ -16,7 +16,7 @@
         required="yes" maxlength="" minlength="" regexp="" sequence=""
         updatepattern="" insertpattern="" selectpattern=""/>-->
     </record>
-    <factory events="deletebefore, deletebybefore, insertafter">
+    <factory events="deletebefore, deletebybefore, insertafter, updateafter">
     	<method name="findByMenu" type="select">
     		<parameter name="menu_id"/>
     		<conditions>

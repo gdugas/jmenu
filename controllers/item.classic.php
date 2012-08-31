@@ -24,44 +24,33 @@ class itemCtrl extends jControllerDaoCrud {
 		$form->setData('basemenu',$this->param('basemenu'));
 	}
 	function _create($form, $resp, $tpl) {
-		jClasses::inc('jmenu~jMenuDb');
-		$menu = jMenuDb::get($form->getData('basemenu'));
-		$tpl->assign('basemenu',$menu->record->id);
+		$tpl->assign('basemenu', $this->param('basemenu'));
 	}
 	function _afterCreate($form, $id, $resp) {
 		$item = jDao::get('jmenu~item')->get($id);
-		jClasses::inc('jmenu~jMenuDb');
-		$menu = jMenuDb::get($form->getData('basemenu'));
 		
 		$resp->action = 'jmenu~menu:view';
-		$resp->params = array('id' => $menu->record->id);
+		$resp->params = array('id' => $this->param('basemenu'));
 	}
 	
 	function _preUpdate($form) {
 		$form->setData('basemenu',$this->param('basemenu'));
 	}
 	function _editUpdate($form, $resp, $tpl) {
-		jClasses::inc('jmenu~jMenuDb');
-		$menu = jMenuDb::get($form->getData('basemenu'));
-		$tpl->assign('basemenu',$menu->record->id);
+		$tpl->assign('basemenu', $form->getData('basemenu'));
 	}
 	function _afterUpdate($form, $id, $resp) {
 		$item = jDao::get('jmenu~item')->get($id);
-		jClasses::inc('jmenu~jMenuDb');
-		$menu = jMenuDb::get($form->getData('basemenu'));
 		
 		$resp->action = 'jmenu~menu:view';
-		$resp->params = array('id' => $menu->record->id);
+		$resp->params = array('id' => $this->param('basemenu'));
 	}
 	
 	
 	function _delete($id, $resp) {
 		jDao::get('jmenu~item')->delete($id);
 		
-		jClasses::inc('jmenu~jMenuDb');
-		$menu = jMenuDb::get($this->param('basemenu'));
-		
 		$resp->action = 'jmenu~menu:view';
-		$resp->params = array('id' => $menu->record->id);
+		$resp->params = array('id' => $this->param('basemenu'));
 	}
 }
