@@ -1,0 +1,17 @@
+{
+  "name": "jelix-modules/jmenu",
+  "description": "A menu system for Jelix",
+  "keywords": ["menu","jmenu"],
+  "homepage": "http://github.com/gdugas/jmenu",
+  "authors": [
+    {
+      "name": "Guillaume",
+      "email": "dugas.guillaume@gmail.com",
+      "homepage": "http://gdugas.dyndns.org"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0"
+  }
+}
+
