@@ -3,6 +3,7 @@
   "description": "A menu system for Jelix",
   "keywords": ["menu","jmenu"],
   "homepage": "http://github.com/gdugas/jmenu",
+  "version": "1.4.0-dev",
   "authors": [
     {
       "name": "Guillaume",
